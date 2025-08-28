@@ -56,7 +56,7 @@ DELETE	/api/users/:id	Elimina usuario por ID
 ```
 Método	    Ruta	                Descripción
 GET	        /api/cart/:userId	    Ver carrito de un usuario
-POST	    /api/cart	Agregar     producto al carrito
+POST	    /api/cart	            Agregar producto al carrito
 DELETE	    /api/cart/:itemId	    Quitar producto del carrito
 ```
 🔹 Órdenes (por implementar 🚧)
