@@ -13,7 +13,6 @@ app.use(cors());
 app.use(express.json());
 app.use(urlencoded({extended:true}));
 
-
 // Llamada a las rutas de productos
 app.use('/api/v1', productsRouter);
 
