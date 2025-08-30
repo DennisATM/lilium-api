@@ -21,19 +21,22 @@ npm install
 Crea un archivo .env en la raíz del proyecto:
 
 ```env
-DB_USER=postgres
-DB_PASS=1234
-DB_HOST=localhost
-DB_NAME=ecommerce
-DB_PORT=5432
-PORT=4000
+PORT=3000
+DB_USER
+DB_PASSWORD
+DB_HOST
+DB_PORT
+DB_NAME
+DB_DIALECT
+JWT_SECRET
+JWT_EXPIRES_IN
 ```
 4. Levantar el servidor
 ```bash
 npm run dev
 ```
 El servidor se ejecutará en:
-👉 http://localhost:4000
+👉 http://localhost:3000
 
 📦 Endpoints disponibles
 
@@ -51,9 +54,9 @@ DELETE	/api/v1/products/:id	Elimina producto por ID
 🔹 Usuarios
 ```
 Método	    Ruta    	                Descripción
-POST	    /api/v1/users/register	Registra un nuevo usuario
-POST        /api/v1/users/login     Inicio de sesión de usuario
-POST        /api/v1/users/guest     Registra un nuevo usuario invitado
+POST	    /api/v1/users/register	Registra un nuevo usuario {firstName, lastName, direction, email, password, phone}
+POST        /api/v1/users/login     Inicio de sesión de usuario {email, password}
+POST        /api/v1/users/guest     Registra un nuevo usuario invitado {firstName, lastName, direction, phone}
 GET	        /api/v1/users	        Lista todos los usuarios
 DELETE	    /api/v1/users/:id	    Elimina usuario por ID
 ```
