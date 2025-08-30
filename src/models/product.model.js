@@ -1,8 +1,7 @@
 import {Model, DataTypes} from 'sequelize';
-import {dbConfig} from '../config/db.config.js';
 
 export class Product extends Model{};
-export const initProduct = ()=>{
+export const initProduct = (dbConfig)=>{
     Product.init({
         id:{
             type:DataTypes.UUID,

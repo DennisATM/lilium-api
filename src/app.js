@@ -6,6 +6,7 @@ import {config} from './config/env.config.js';
 
 import productsRouter from './routes/product.route.js';
 import userRouter from './routes/user.route.js';
+import cartRouter from './routes/cart.route.js';
 
 const {port} = config;
 
@@ -18,5 +19,6 @@ app.use(urlencoded({extended:true}));
 app.use('/api/v1', productsRouter);
 
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/cart', cartRouter);
 
 serverInit(app, port);

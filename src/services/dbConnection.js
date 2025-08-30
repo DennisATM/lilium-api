@@ -1,10 +1,12 @@
 import { dbConfig } from "../config/db.config.js"
 import { initModels } from "../utils/initModels.js";
+import { setupAssociation } from "../utils/setupAssociations.js";
 
 export const dbConnect = async ()=>{
     try {
         await dbConfig.authenticate();
         initModels(dbConfig);
+        await setupAssociation();
         await dbConfig.sync({alter:true});
         console.log('Logramos conectarnos a la BD a traves de Sequelize');       
     } catch (error) {

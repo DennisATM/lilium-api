@@ -60,12 +60,12 @@ POST        /api/v1/users/guest     Registra un nuevo usuario invitado {firstNam
 GET	        /api/v1/users	        Lista todos los usuarios
 DELETE	    /api/v1/users/:id	    Elimina usuario por ID
 ```
-🔹 Carrito de compras (por implementar 🚧)
+🔹 Carrito de compras
 ```
 Método	    Ruta	                Descripción
-GET	        /api/cart/:userId	    Ver carrito de un usuario
-POST	    /api/cart	            Agregar producto al carrito
-DELETE	    /api/cart/:itemId	    Quitar producto del carrito
+GET	        /api/cart	            Ver carrito del usuario logueado {Header: Bearer <token>}
+POST	    /api/cart	            Agregar producto al carrito {idProduct:<id>, quantity:<qt>}
+Resto de endpoints por implementar
 ```
 🔹 Órdenes (por implementar 🚧)
 ```
