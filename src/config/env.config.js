@@ -12,9 +12,9 @@ export const config = {
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
         dialect: process.env.DB_DIALECT,
-        jwt:{
-            secret: process.env.JWT_SECRET,
-            expiresIn: process.env.JWT_EXPIRES_IN || '1h'
-        }
+    },
+    jwt:{
+        secret: process.env.JWT_SECRET,
+        expiresIn: process.env.JWT_EXPIRES_IN || '7d'
     }
 }

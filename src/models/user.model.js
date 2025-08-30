@@ -52,7 +52,7 @@ export const initUser = ()=>{
         },
         email:{
             type:DataTypes.STRING,
-            allowNull:false,
+            allowNull:true,
             unique:{msg:'El correo electrónico ingresado ya está en uso'},
             validate:{
                 notEmpty:{msg:'El email no debe ser un dato vacío'},
@@ -61,11 +61,25 @@ export const initUser = ()=>{
         },
         password:{
             type:DataTypes.STRING,
-            allowNull:false
+            allowNull:true
         },
         admin:{
             type:DataTypes.BOOLEAN,
             defaultValue:false
+        },
+        isGuest:{
+            type:DataTypes.BOOLEAN,
+            defaultValue:false
+        },
+        phone:{
+            type:DataTypes.STRING,
+            allowNull:true, 
+            validate:{
+                is:{
+                    args:/^\+?[0-9]{7,15}$/,
+                    msg:['El número telefónico no es válido']
+                }
+            }
         }
     },{
         sequelize:dbConfig,

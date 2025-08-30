@@ -5,6 +5,7 @@ import { serverInit } from './services/serverInit.js'
 import {config} from './config/env.config.js';
 
 import productsRouter from './routes/product.route.js';
+import userRouter from './routes/user.route.js';
 
 const {port} = config;
 
@@ -15,5 +16,7 @@ app.use(urlencoded({extended:true}));
 
 // Llamada a las rutas de productos
 app.use('/api/v1', productsRouter);
+
+app.use('/api/v1/users', userRouter);
 
 serverInit(app, port);

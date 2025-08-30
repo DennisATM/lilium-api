@@ -48,12 +48,14 @@ PUT     /api/v1/products/:id    Edita los datos de un producto
 GET     /api/v1/filter          Filtra los productos {minPrice, maxPrice, name } 
 DELETE	/api/v1/products/:id	Elimina producto por ID
 ```
-🔹 Usuarios (por implementar 🚧)
+🔹 Usuarios
 ```
-Método	Ruta    	    Descripción
-GET	    /api/users	    Lista todos los usuarios
-POST	/api/users	    Registra un nuevo usuario
-DELETE	/api/users/:id	Elimina usuario por ID
+Método	    Ruta    	                Descripción
+POST	    /api/v1/users/register	Registra un nuevo usuario
+POST        /api/v1/users/login     Inicio de sesión de usuario
+POST        /api/v1/users/guest     Registra un nuevo usuario invitado
+GET	        /api/v1/users	        Lista todos los usuarios
+DELETE	    /api/v1/users/:id	    Elimina usuario por ID
 ```
 🔹 Carrito de compras (por implementar 🚧)
 ```
