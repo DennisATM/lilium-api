@@ -58,14 +58,17 @@ POST	    /api/v1/users/register	Registra un nuevo usuario {firstName, lastName, 
 POST        /api/v1/users/login     Inicio de sesión de usuario {email, password}
 POST        /api/v1/users/guest     Registra un nuevo usuario invitado {firstName, lastName, direction, phone}
 GET	        /api/v1/users	        Lista todos los usuarios
+GET         /api/v1/users/me        Lista los datos del usuario activo
 DELETE	    /api/v1/users/:id	    Elimina usuario por ID
 ```
 🔹 Carrito de compras
 ```
-Método	    Ruta	                Descripción
-GET	        /api/cart	            Ver carrito del usuario logueado {Header: Bearer <token>}
-POST	    /api/cart	            Agregar producto al carrito {idProduct:<id>, quantity:<qt>}
-Resto de endpoints por implementar
+Método	    Ruta	                    Descripción
+GET	        /api/v1/cart	            Ver carrito del usuario/invitado {Header: Bearer <token>}
+POST	    /api/v1/cart	            Agregar producto al carrito {idProduct:<id>, quantity:<qt>}
+PUT         /api/v1/cart/:id            Actualiza cantidad de un item del carrito del usuario activo {quantity:<qt>}
+DELETE      /api/v1/cart/:id            Elimina un item por id del carrito del usuario activo
+DELETE      /api/v1/cart                Vacía el carrito de compras del usuario activo
 ```
 🔹 Órdenes (por implementar 🚧)
 ```

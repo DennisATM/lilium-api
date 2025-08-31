@@ -95,48 +95,6 @@ export const createGuestUser = async (req, res) => {
     }
 };
 
-export const getAllUsers = async (req, res) => {
-    try {
-        const users = await User.findAll({attributes: { exclude: ['email', 'password'] }});
-        
-        res.status(200).json({
-            message: 'Usuarios obtenidos con éxito',
-            status: 200,
-            data: users
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            message: 'Error al obtener los usuarios',
-            status: 500
-        });
-    }
-};
-
-export const deleteUser = async (req, res) => {
-    try {
-        const { id } = req.params;  
-        const user = await User.findByPk(id);
-        if (!user) {
-            return res.status(404).json({
-                message: 'Usuario no encontrado',
-                status: 404
-            });
-        }
-        await user.destroy();
-        res.status(200).json({
-            message: 'Usuario eliminado con éxito',
-            status: 200
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            message: 'Error al eliminar el usuario',
-            status: 500
-        });
-    }
-};
-
 export const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;   
@@ -175,3 +133,70 @@ export const loginUser = async (req, res) => {
         });
     }
 };
+
+export const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.findAll({attributes: { exclude: ['email', 'password'] }});
+        
+        res.status(200).json({
+            message: 'Usuarios obtenidos con éxito',
+            status: 200,
+            data: users
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            message: 'Error al obtener los usuarios',
+            status: 500
+        });
+    }
+};
+
+export const getMe = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const user = await User.findByPk(userId, {attributes: { exclude: ['password'] }});
+        if (!user) {
+            return res.status(404).json({
+                message: 'Usuario no encontrado',
+                status: 404
+            });
+        }   
+        res.status(200).json({
+            message: 'Datos del usuario obtenidos con éxito',
+            status: 200,
+            data: user
+        });
+    }catch (error) {
+        console.error(error);
+        res.status(500).json({
+            message: 'Error al obtener los datos del usuario',
+            status: 500
+        });
+    }
+};
+
+export const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;  
+        const user = await User.findByPk(id);
+        if (!user) {
+            return res.status(404).json({
+                message: 'Usuario no encontrado',
+                status: 404
+            });
+        }
+        await user.destroy();
+        res.status(200).json({
+            message: 'Usuario eliminado con éxito',
+            status: 200
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            message: 'Error al eliminar el usuario',
+            status: 500
+        });
+    }
+};
+
