@@ -73,9 +73,9 @@ DELETE      /api/v1/cart                Vacía el carrito de compras del usuario
 🔹 Órdenes (por implementar 🚧)
 ```
 Método	    Ruta	            Descripción
-GET	        /api/orders	        Lista todas las órdenes
-POST	    /api/orders	        Crea una nueva orden
-GET	        /api/orders/:id	    Ver detalle de una orden
+GET	        /api/v1/orders	        Lista todas las órdenes
+POST	    /api/v1/orders	        Crea una nueva orden
+GET	        /api/v1/orders/:id	    Ver detalle de una orden
 ```
 🧰 Tecnologías utilizadas
 Node.js + Express
