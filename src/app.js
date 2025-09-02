@@ -7,6 +7,7 @@ import {config} from './config/env.config.js';
 import productsRouter from './routes/product.route.js';
 import userRouter from './routes/user.route.js';
 import cartRouter from './routes/cart.route.js';
+import  ordersRouter  from './routes/order.route.js';
 
 const {port} = config;
 
@@ -20,5 +21,8 @@ app.use('/api/v1', productsRouter);
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/cart', cartRouter);
+
+// Llamada a las rutas de órdenes
+app.use('/api/v1/orders', ordersRouter);
 
 serverInit(app, port);

@@ -70,12 +70,13 @@ PUT         /api/v1/cart/:id            Actualiza cantidad de un item del carrit
 DELETE      /api/v1/cart/:id            Elimina un item por id del carrito del usuario activo
 DELETE      /api/v1/cart                Vacía el carrito de compras del usuario activo
 ```
-🔹 Órdenes (por implementar 🚧)
+🔹 Órdenes
 ```
 Método	    Ruta	            Descripción
-GET	        /api/v1/orders	        Lista todas las órdenes
-POST	    /api/v1/orders	        Crea una nueva orden
-GET	        /api/v1/orders/:id	    Ver detalle de una orden
+GET	        /api/v1/orders	        Lista todas las órdenes <Solo admin>
+POST	    /api/v1/orders	        Crea una nueva orden {"items":{<items>}, "total":<total>}
+GET	        /api/v1/orders/:id	    Ver detalle de una orden creada por usuario activo.
+PUT         /api/v1/orders/:id      Cambiar estado de orden {"status":<status>} <Solo admin>
 ```
 🧰 Tecnologías utilizadas
 Node.js + Express
@@ -89,12 +90,14 @@ CORS + Dotenv
 Nodemon (para desarrollo)
 
 📖 Notas de desarrollo
+
  Implementar módulo de usuarios con autenticación (JWT).
 
  Crear lógica de carrito de compras.
 
  Generar órdenes con relación a productos y usuarios.
 
+ POR IMPLEMENTAR:
  Agregar pruebas unitarias (Jest / Supertest).
 
  Documentación futura con Swagger (si el proyecto escala).
