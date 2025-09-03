@@ -46,20 +46,20 @@ El servidor se ejecutará en:
 Método	Ruta	            Descripción	
 GET	    /api/v1/products	    Lista todos los productos
 GET	    /api/v1/products/:id	Lista todos los productos por id
-POST	/api/v1/products	    Crea un nuevo producto	{ "name": "Laptop", "price": 1200.50, "stock": 10 }
-PUT     /api/v1/products/:id    Edita los datos de un producto
+POST	/api/v1/products	    Crea un nuevo producto	{ "name": <name>, "description":<description>, "price": <price>, "stock":<stock>, "imageUrl":<imageUrl>} <Solo Admin>
+PUT     /api/v1/products/:id    Edita los datos de un producto <Solo Admin>
 GET     /api/v1/filter          Filtra los productos {minPrice, maxPrice, name } 
-DELETE	/api/v1/products/:id	Elimina producto por ID
+DELETE	/api/v1/products/:id	Elimina producto por ID <Solo Admin>
 ```
 🔹 Usuarios
 ```
 Método	    Ruta    	                Descripción
-POST	    /api/v1/users/register	Registra un nuevo usuario {firstName, lastName, direction, email, password, phone}
+POST	    /api/v1/users/register	Registra un nuevo usuario {firstName, lastName, direction, email, password, phone, admin}
 POST        /api/v1/users/login     Inicio de sesión de usuario {email, password}
 POST        /api/v1/users/guest     Registra un nuevo usuario invitado {firstName, lastName, direction, phone}
-GET	        /api/v1/users	        Lista todos los usuarios
+GET	        /api/v1/users	        Lista todos los usuarios <Solo Admin>
 GET         /api/v1/users/me        Lista los datos del usuario activo
-DELETE	    /api/v1/users/:id	    Elimina usuario por ID
+DELETE	    /api/v1/users/:id	    Elimina usuario por ID <El usuario se da de baja>
 ```
 🔹 Carrito de compras
 ```
