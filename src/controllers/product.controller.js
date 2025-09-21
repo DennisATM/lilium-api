@@ -67,7 +67,7 @@ export const getProductById = async (req, res) => {
 export const updateProduct = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, description, price, stock, imageUrl } = req.body;
+        const { name, description, price, stock, imageUrl,isRecommended } = req.body;
         const product = await Product.findByPk(id);
         if (!product) {
             return res.status(404).json({
@@ -76,7 +76,7 @@ export const updateProduct = async (req, res) => {
                 data: null
             });
         }
-        await product.update({ name, description, price, stock, imageUrl });
+        await product.update({ name, description, price, stock, imageUrl, isRecommended });
         res.status(200).json({
             message: 'Producto actualizado con éxito',
             status: 200,

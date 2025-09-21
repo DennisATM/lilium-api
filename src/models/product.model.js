@@ -56,6 +56,10 @@ export const initProduct = (dbConfig)=>{
             type:DataTypes.STRING,
             allowNull:true,
             
+        },
+        isRecommended:{
+            type:DataTypes.BOOLEAN,
+            defaultValue:false
         }
     },{
         sequelize:dbConfig,
