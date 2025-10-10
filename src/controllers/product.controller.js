@@ -21,8 +21,8 @@ export const getAllProducts = async (req, res) => {
 
 export const createProduct = async (req, res) => {
     try {
-        const { name, description, price, stock, imageUrl } = req.body;
-        const newProduct = await Product.create({ name, description, price, stock, imageUrl });
+        const { name, description, price, stock, imageUrl, category} = req.body;
+        const newProduct = await Product.create({ name, description, price, stock, imageUrl, category });
         res.status(201).json({
             message: 'Producto creado con éxito',
             status: 201,
@@ -67,7 +67,7 @@ export const getProductById = async (req, res) => {
 export const updateProduct = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, description, price, stock, imageUrl,isRecommended } = req.body;
+        const { name, description, price, stock, imageUrl,isRecommended, category } = req.body;
         const product = await Product.findByPk(id);
         if (!product) {
             return res.status(404).json({
@@ -76,7 +76,7 @@ export const updateProduct = async (req, res) => {
                 data: null
             });
         }
-        await product.update({ name, description, price, stock, imageUrl, isRecommended });
+        await product.update({ name, description, price, stock, imageUrl, isRecommended, category });
         res.status(200).json({
             message: 'Producto actualizado con éxito',
             status: 200,
@@ -94,7 +94,7 @@ export const updateProduct = async (req, res) => {
 
 export const filterProducts = async (req, res) => {
   try {
-    const { name, minPrice, maxPrice, order, dir } = req.query;
+    const { name, minPrice, maxPrice, order, dir,category } = req.query;
 
     const where = {};
 
@@ -109,11 +109,15 @@ export const filterProducts = async (req, res) => {
       if (minPrice) where.price[Op.gte] = parseFloat(minPrice);
       if (maxPrice) where.price[Op.lte] = parseFloat(maxPrice);
     }
+    //filtrar por categoria
+    if(req.query.category){
+        where.category = category;
+    }
 
     // 🔹 Ordenamiento
     let orderBy = [];
     if (order) {
-      const validFields = ["name", "price", "stock", "id"]; // campos válidos
+      const validFields = ["name", "price", "stock", "id", "category"]; // campos válidos
       const validDirections = ["asc", "desc"];
       const field = validFields.includes(order) ? order : "id";
       const direction = validDirections.includes(dir?.toLowerCase()) ? dir.toUpperCase() : "ASC";
