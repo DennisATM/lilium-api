@@ -62,14 +62,9 @@ export const initProduct = (dbConfig)=>{
             defaultValue:false
         },
         category:{
-            type:DataTypes.ENUM('velas','ambientadores','difusores','detalles'),
-            allowNull:false,
-            validate:{
-                isIn:{
-                    args:[['velas','ambientadores','difusores','detalles']],
-                    msg:'La categoría debe ser una de las siguientes: velas, inciensos, difusores, baño, accesorios',
-                }
-            }
+            type:DataTypes.STRING,
+            allowNull:true,
+           
         }
     },{
         sequelize:dbConfig,

@@ -46,7 +46,7 @@ El servidor se ejecutará en:
 Método	Ruta	            Descripción	
 GET	    /api/v1/products	    Lista todos los productos
 GET	    /api/v1/products/:id	Lista todos los productos por id
-POST	/api/v1/products	    Crea un nuevo producto	{ "name": <name>, "description":<description>, "price": <price>, "stock":<stock>, "imageUrl":<imageUrl>} <Solo Admin>
+POST	/api/v1/products	    Crea un nuevo producto	{ "name": <name>, "description":<description>, "price": <price>, "stock":<stock>, "imageUrl":<imageUrl>,"category":<category>} <Solo Admin>
 PUT     /api/v1/products/:id    Edita los datos de un producto <Solo Admin>
 GET     /api/v1/filter          Filtra los productos {minPrice, maxPrice, name } 
 DELETE	/api/v1/products/:id	Elimina producto por ID <Solo Admin>
