@@ -1,4 +1,3 @@
-
 import multer from 'multer';
 import path from 'path';
 
@@ -30,12 +29,16 @@ export const upload = multer({
     }
 });
 
-export const uploadImage = async (req, res)=>{
+export const uploadImage = (req, res)=>{
+    console.log(req.body);
     try {
-        upload.single('image');
+        if(!req.file){
+            throw new Error('Archivo no proporcionado');
+        }
+        
         res.status(200).json({
-            filename: req.file.filename,
-            path: `/imgProducts/${req.file.filename}`
+            ok: true,
+            imageUrl: req.file.filename
         });
     } catch (error) {
         console.log(error);
