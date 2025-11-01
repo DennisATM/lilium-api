@@ -8,6 +8,7 @@ import productsRouter from './routes/product.route.js';
 import userRouter from './routes/user.route.js';
 import cartRouter from './routes/cart.route.js';
 import  ordersRouter  from './routes/order.route.js';
+import uploadRouter from './routes/upload.route.js';
 
 const {port} = config;
 
@@ -24,5 +25,9 @@ app.use('/api/v1/cart', cartRouter);
 
 // Llamada a las rutas de órdenes
 app.use('/api/v1/orders', ordersRouter);
+
+app.use('/api/v1/upload', uploadRouter);
+
+app.use('/imgProducts', express.static('public/imgProducts'));
 
 serverInit(app, port);
