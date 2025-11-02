@@ -1,54 +1,49 @@
 import multer from 'multer';
 import cloudinary from '../config/cloudinary.config.js';
-import { CloudinaryStorage } from 'multer-storage-cloudinary';
+import streamifier from 'streamifier';
 
-// Configurar almacenamiento en Cloudinary
-const storage = new CloudinaryStorage({
-    cloudinary: cloudinary,
-    params: {
-        folder: 'lilium-products', // carpeta en Cloudinary
-        allowed_formats: ['jpg', 'png', 'jpeg', 'gif'],
-        transformation: [{ width: 500, height: 500, crop: 'limit' }] // opcional: redimensionar
-    }
-});
-
-// Configurar multer con Cloudinary
+// Usar memoria para obtener buffer y enviarlo a Cloudinary
+const storage = multer.memoryStorage();
 export const upload = multer({
-    storage: storage,
-    limits: {
-        fileSize: 5 * 1024 * 1024 // 5MB
-    },
-    fileFilter: (req, file, cb) => {
-        if (file.mimetype.startsWith('image/')) {
-            cb(null, true);
-        } else {
-            cb(new Error('Solo se permiten imágenes'));
-        }
-    }
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype && file.mimetype.startsWith('image/')) cb(null, true);
+    else cb(new Error('Solo se permiten imágenes'), false);
+  },
 });
 
+// Controlador que sube buffer a Cloudinary
 export const uploadImage = async (req, res) => {
-    try {
-        if (!req.file) {
-            return res.status(400).json({
-                ok: false,
-                error: 'Archivo no proporcionado'
-            });
-        }
-
-        // req.file ya contiene la información de Cloudinary
-        res.status(200).json({
-            ok: true,
-            imageUrl: req.file.path, // URL de Cloudinary
-            public_id: req.file.filename // ID público en Cloudinary
-        });
-
-    } catch (error) {
-        console.error('Error al subir imagen:', error);
-        res.status(500).json({
-            ok: false,
-            error: 'Error al subir archivo',
-            data: null
-        });
+  try {
+    if (!req.file || !req.file.buffer) {
+      return res.status(400).json({ ok: false, error: 'No se recibió ningún archivo' });
     }
+
+    const options = {
+      folder: 'lilium-products',
+      transformation: [{ width: 800, height: 800, crop: 'limit' }],
+    };
+
+    const uploadStream = cloudinary.uploader.upload_stream(
+      options,
+      (error, result) => {
+        if (error) {
+          console.error('Cloudinary upload error:', error);
+          return res.status(500).json({ ok: false, error: 'Error al subir a Cloudinary' });
+        }
+        return res.status(200).json({
+          ok: true,
+          imageUrl: result.secure_url,
+          public_id: result.public_id,
+        });
+      }
+    );
+
+    // Convertir buffer a stream y pipear a Cloudinary
+    streamifier.createReadStream(req.file.buffer).pipe(uploadStream);
+  } catch (err) {
+    console.error('uploadImage error:', err);
+    return res.status(500).json({ ok: false, error: 'Error del servidor' });
+  }
 };
