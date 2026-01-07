@@ -21,8 +21,8 @@ export const getAllProducts = async (req, res) => {
 
 export const createProduct = async (req, res) => {
     try {
-        const { name, description, price, stock, imageUrl, category} = req.body;
-        const newProduct = await Product.create({ name, description, price, stock, imageUrl, category });
+        const { name, description, price, stock, imageUrl, isRecommended, category} = req.body;
+        const newProduct = await Product.create({ name, description, price, stock, imageUrl, isRecommended, category });
         res.status(201).json({
             message: 'Producto creado con éxito',
             status: 201,
@@ -67,7 +67,7 @@ export const getProductById = async (req, res) => {
 export const updateProduct = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, description, price, stock, imageUrl,isRecommended, category } = req.body;
+        const { name, description, price, stock, imageUrl, isRecommended, category } = req.body;
         const product = await Product.findByPk(id);
         if (!product) {
             return res.status(404).json({
